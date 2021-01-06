@@ -16,4 +16,4 @@ Given that this could be abused and that it is not intended for anything else i'
  
  If you are setting this up for the first time, i suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
  
- Best of luck, no warranty or support is provided - use at your own risk!
+ ### Remember: no warranty, responsibility on my behalf or support is provided - use at your own risk!
