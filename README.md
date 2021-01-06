@@ -1,5 +1,5 @@
 # Aus Stock Checker
-A tool to monitor stock availability and notify you of items you wish to purchase from a collection of Australian retailers, such as NVIDIA and AMD GPUs/CPUs which are hard to find and when you do you only have minutes to act.
+A tool to monitor stock availability and notify you of items you wish to purchase from a collection of Australian retailers, such as NVIDIA and AMD GPUs/CPUs which are hard to find and when you do you only have minutes to act - every second up your sleeve counts.
 
 Given a list of product urls from these retailers (Umart, Mwave, PC Case Gear, Computer Alliance, PLE, Scorptec) the tool will scan the urls every 30 seconds and it will determine if the item is in stock. If the status has changes to something other than out of stock (in stock, pre order etc) the application will sound a beep and send you and email to purchase your item.
 
