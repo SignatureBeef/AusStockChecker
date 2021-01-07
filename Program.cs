@@ -47,15 +47,14 @@ namespace AusStockChecker
         {
             try
             {
-
                 var fromAddress = new MailAddress("--- INSERT EMAIL TO SEND FROM ---", "Aus Stock Checker");
                 var toAddress = new MailAddress("--- INSERT EMAIL ADDRESS TO NOTIFY ---", "Customer");
 
                 var smtp = new SmtpClient
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
+                    Host = "smtp.gmail.com", // INSERT YOUR HOST IF NOT GMAIL
+                    Port = 587, // INSERT YOUR PORT
+                    EnableSsl = true, 
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(fromAddress.Address, "--- INSERT YOUR EMAIL PASSWORD TO SEND FROM ---")
