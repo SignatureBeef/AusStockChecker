@@ -5,7 +5,7 @@ namespace AusStockChecker.Stores
 {
     class PCCaseGear : MonitorItem
     {
-        public override string TaskCategory { get; set; } = "Mwave";
+        public override string TaskCategory { get; set; } = "PCCG";
 
         public override bool Process(string html, out string status)
         {

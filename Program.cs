@@ -26,7 +26,7 @@ namespace AusStockChecker
             using var tmr = new Timer(1000);
             tmr.Elapsed += UptimeTimer_Elapsed;
             tmr.Start();
-            Console.Gradient("Aus Stock Checker!", gradient: new[] { ConsoleColor.DarkBlue, ConsoleColor.DarkGray, ConsoleColor.DarkBlue, }, pattern: GradientPattern.Word);
+            Console.Gradient("Stock Checker!", gradient: new[] { ConsoleColor.DarkGray, ConsoleColor.DarkBlue, }, pattern: GradientPattern.Word);
 
             //Console.AddStatusBar(ProgressStatusBar);
             Console.AddStatusBar(UptimeStatusBar);
@@ -45,28 +45,44 @@ namespace AusStockChecker
 
         static void SendNotice(string title, string notice)
         {
-            var fromAddress = new MailAddress("--- INSERT EMAIL TO SEND FROM ---", "Aus Stock Checker");
-            var toAddress = new MailAddress("--- INSERT EMAIL ADDRESS TO NOTIFY ---", "Customer");
+            try
+            {
 
-            var smtp = new SmtpClient
+                var fromAddress = new MailAddress("--- INSERT EMAIL TO SEND FROM ---", "Aus Stock Checker");
+                var toAddress = new MailAddress("--- INSERT EMAIL ADDRESS TO NOTIFY ---", "Customer");
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, "--- INSERT YOUR EMAIL PASSWORD TO SEND FROM ---")
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = "Stock Notification: " + title,
+                    Body = notice,
+                    IsBodyHtml = true,
+                    Priority = MailPriority.High,
+                })
+                {
+                    message.Headers.Add("Importance", "High");
+                    smtp.Send(message);
+                }
+            }
+            catch (Exception ex)
             {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, "--- INSERT YOUR EMAIL PASSWORD TO SEND FROM ---")
-            };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = "Stock Notification: " + title,
-                Body = notice,
-                IsBodyHtml = true,
-                Priority = MailPriority.High,
-            })
-            {
-                message.Headers.Add("Importance", "High");
-                smtp.Send(message);
+                Console.LocalTime(ConsoleColor.DarkGray)
+                            .DarkCyan($" ERR")
+                            .DarkGray($"> ")
+                            .WriteLine(ex, ConsoleColor.Red);
+
+                Console.LocalTime(ConsoleColor.DarkGray)
+                            .DarkCyan($" ERR")
+                            .DarkGray($"> ")
+                            .WriteLine("--- ENSURE YOU UPDATE THE EMAIL INFORMATION! ---", ConsoleColor.Red);
             }
         }
 
@@ -88,8 +104,8 @@ namespace AusStockChecker
             new ComputerAlliance(){Title="3080 ROG STRIX OC", TaskCategory = "ComputerAlliance", Url="https://www.computeralliance.com.au/asus-rtx3080-10gb-rog-strix-oc-gaming-pcie-video-card-rog-strix-rtx3080-o10g-gaming?vade3w={invalidator}"},
             new ComputerAlliance(){Title="3090 ROG STRIX OC", TaskCategory = "ComputerAlliance", Url="https://www.computeralliance.com.au/asus-rtx3090-24gb-rog-strix-oc-pcie-video-card-rog-strix-rtx3090-o24g-gaming?vade3w={invalidator}"},
 
-            new PCCaseGear(){Title="3080 ROG STRIX OC", TaskCategory = "Pcg", Url="https://www.pccasegear.com/products/51850/asus-rog-strix-geforce-rtx-3080-oc-10gb?vade3w={invalidator}"},
-            new PCCaseGear(){Title="3090 ROG STRIX OC", TaskCategory = "Pcg", Url="https://www.pccasegear.com/products/51847/asus-rog-strix-geforce-rtx-3090-oc-24gb?vade3w={invalidator}"},
+            new PCCaseGear(){Title="3080 ROG STRIX OC", Url="https://www.pccasegear.com/products/51850/asus-rog-strix-geforce-rtx-3080-oc-10gb?vade3w={invalidator}"},
+            new PCCaseGear(){Title="3090 ROG STRIX OC", Url="https://www.pccasegear.com/products/51847/asus-rog-strix-geforce-rtx-3090-oc-24gb?vade3w={invalidator}"},
         };
         static int? ItemNumber { get; set; }
 
