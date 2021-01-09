@@ -11,7 +11,7 @@ Given that this could be abused and that it is not intended for anything else i'
 ## Requirements
  - Visual Studio / IDE / compiler with .NET 5 support
  - Update Program.cs with an email account to send out emails for stock notifications. 
-   - If you use a gmail account, you might need to allow legacy applications.
+   - If you use a gmail account, you might need to allow legacy applications or create an app password using the following [link](https://support.google.com/accounts/answer/185833?hl=en).
  - Update Program.cs with a destination email address (your email address so you receive the notification!).
    - If you use gmail, you can set the sending email address as priority so you get push notifications to your phones home screen.
  - Update Program.cs "Items" list with the retailer, the product url and a title for use within the notification email.
@@ -19,3 +19,5 @@ Given that this could be abused and that it is not intended for anything else i'
 If you are setting this up for the first time, I suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
  
  ### Remember: no warranty, responsibility on my behalf or support is provided - use at your own risk!
+
+## Recommendations

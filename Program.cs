@@ -8,9 +8,29 @@ using System.Threading.Tasks;
 using System.Timers;
 using Console = SimpleConsole.SimpleConsole;
 using SysConsole = System.Console;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.IO;
 
 namespace AusStockChecker
 {
+    class UserDetails {
+        public string FromAddress { get; set; }
+        public string FromAddressPassword { get; set; }
+        public string ToAddress { get; set; }
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public Item[] Items { get; set; }
+
+    }
+
+    class Item
+    {
+        public string Title { get; set; }
+        public string URL { get; set; }
+        public string TaskCategory { get; set; }
+    }
+
     static class Program
     {
         static StatusBar UptimeStatusBar { get; set; } = new StatusBar()
@@ -21,8 +41,52 @@ namespace AusStockChecker
         static int Requests = 0;
         static int BrowserInstances = 0;
 
+        static UserDetails userDetails;
+
         static void Main()
         {
+            // Get user details
+            try
+            {
+                using (var sr = new StreamReader("UserDetails.yaml"))
+                {
+                    
+                    var deserializer = new DeserializerBuilder().Build();
+                    userDetails = deserializer.Deserialize<UserDetails>(sr.ReadToEnd());
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("User details could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
+            // Get items desired
+            foreach(Item item in userDetails.Items)
+            {
+                
+                switch (item.TaskCategory)
+                {
+                    case "Mwave":
+                        Items.Add(new Mwave() { Title = item.Title, Url = item.URL });
+                        break;
+                    case "Umart":
+                        Items.Add(new Umart() { Title = item.Title, Url = item.URL });
+                        break;
+                    case "ComputerAlliance":
+                        Items.Add(new ComputerAlliance() { Title = item.Title, TaskCategory = item.TaskCategory, Url = item.URL });
+                        break;
+                    case "PCCaseGear":
+                        Items.Add(new PCCaseGear() { Title = item.Title, Url = item.URL });
+                        break;
+                    default:
+                        Items.Add(new SchemaItem() { Title = item.Title, TaskCategory = item.TaskCategory, Url = item.URL });
+                        break;
+                }
+            }
+
+            
+
             using var tmr = new Timer(1000);
             tmr.Elapsed += UptimeTimer_Elapsed;
             tmr.Start();
@@ -47,17 +111,17 @@ namespace AusStockChecker
         {
             try
             {
-                var fromAddress = new MailAddress("--- INSERT EMAIL TO SEND FROM ---", "Aus Stock Checker");
-                var toAddress = new MailAddress("--- INSERT EMAIL ADDRESS TO NOTIFY ---", "Customer");
+                var fromAddress = new MailAddress(userDetails.FromAddress, "Aus Stock Checker");
+                var toAddress = new MailAddress(userDetails.ToAddress, "Customer");
 
                 var smtp = new SmtpClient
                 {
-                    Host = "smtp.gmail.com", // INSERT YOUR HOST IF NOT GMAIL
-                    Port = 587, // INSERT YOUR PORT
+                    Host = userDetails.Host,
+                    Port = userDetails.Port,
                     EnableSsl = true, 
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromAddress.Address, "--- INSERT YOUR EMAIL PASSWORD TO SEND FROM ---")
+                    Credentials = new NetworkCredential(fromAddress.Address, userDetails.FromAddressPassword)
                 };
                 using (var message = new MailMessage(fromAddress, toAddress)
                 {
@@ -86,26 +150,7 @@ namespace AusStockChecker
         }
 
         /// UPDATE THE LINKS YOU WANT
-        static List<MonitorItem> Items = new List<MonitorItem>()
-        {
-            new Mwave(){Title="3080 ROG STRIX OC", Url="https://www.mwave.com.au/product/asus-geforce-rtx-3080-rog-strix-oc-10gb-video-card-ac38206?vade32={invalidator}"},
-            new Mwave(){Title="3090 ROG STRIX OC", Url="https://www.mwave.com.au/product/asus-geforce-rtx-3090-rog-strix-gaming-oc-24gb-video-card-ac38207?vade3w={invalidator}"},
-
-            new Umart(){Title="3080 ROG STRIX OC", Url="https://www.umart.com.au/Asus-ROG-Strix-GeForce-RTX-3080-OC-10G-Graphics-Card_56893G.html?vade32={invalidator}"},
-            new Umart(){Title="3090 ROG STRIX OC", Url="https://www.umart.com.au/Asus-ROG-Strix-GeForce-RTX-3090-OC-24G-Graphics-Card_56890G.html?vade3w={invalidator}"},
-
-            new SchemaItem(){Title="3080 ROG STRIX OC", TaskCategory = "Scorptec", Url="https://www.scorptec.com.au/product/graphics-cards/nvidia/85382-rog-strix-rtx3080-o10g-gaming?vade3w={invalidator}"},
-            new SchemaItem(){Title="3090 ROG STRIX OC", TaskCategory = "Scorptec", Url="https://www.scorptec.com.au/product/Graphics-Cards/NVIDIA/85441-ROG-STRIX-RTX3090-O24G-GAMING?vade3w={invalidator}"},
-
-            new SchemaItem(){Title="3090 ROG STRIX OC", TaskCategory = "Ple", Url="https://www.ple.com.au/Products/643402/ASUS-GeForce-RTX-3090-ROG-Strix-Gaming-OC-24GB-GDDR6X?vade3w={invalidator}"},
-            new SchemaItem(){Title="3080 ROG STRIX OC", TaskCategory = "Ple", Url="https://www.ple.com.au/Products/643403/ASUS-GeForce-RTX-3080-ROG-Strix-Gaming-OC-10GB-GDDR6X?vade3w={invalidator}"},
-
-            new ComputerAlliance(){Title="3080 ROG STRIX OC", TaskCategory = "ComputerAlliance", Url="https://www.computeralliance.com.au/asus-rtx3080-10gb-rog-strix-oc-gaming-pcie-video-card-rog-strix-rtx3080-o10g-gaming?vade3w={invalidator}"},
-            new ComputerAlliance(){Title="3090 ROG STRIX OC", TaskCategory = "ComputerAlliance", Url="https://www.computeralliance.com.au/asus-rtx3090-24gb-rog-strix-oc-pcie-video-card-rog-strix-rtx3090-o24g-gaming?vade3w={invalidator}"},
-
-            new PCCaseGear(){Title="3080 ROG STRIX OC", Url="https://www.pccasegear.com/products/51850/asus-rog-strix-geforce-rtx-3080-oc-10gb?vade3w={invalidator}"},
-            new PCCaseGear(){Title="3090 ROG STRIX OC", Url="https://www.pccasegear.com/products/51847/asus-rog-strix-geforce-rtx-3090-oc-24gb?vade3w={invalidator}"},
-        };
+        static List<MonitorItem> Items = new List<MonitorItem>();
         static int? ItemNumber { get; set; }
 
         static async Task Run()
