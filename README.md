@@ -18,4 +18,10 @@ Given that this could be abused and that it is not intended for anything else i'
  
 If you are setting this up for the first time, I suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
 
+## How to use
+ - Open the project in Visual Studio and compile. This will create bin/Debug/net5.0/UserDetails.yaml
+ - Modify UserDetails.yaml with your details as required
+ - Add in a test item that is in stock to confirm the notifications work
+ - Use as required
+
 ### Remember: no warranty, responsibility on my behalf or support is provided - use at your own risk!
