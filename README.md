@@ -10,18 +10,20 @@ Given that this could be abused and that it is not intended for anything else i'
 
 ## Requirements
  - Visual Studio / IDE / compiler with .NET 5 support
- - Update Program.cs with an email account to send out emails for stock notifications. 
-   - If you use a gmail account, you might need to allow legacy applications or create an app password using the following [link](https://support.google.com/accounts/answer/185833?hl=en).
- - Update Program.cs with a destination email address (your email address so you receive the notification!).
-   - If you use gmail, you can set the sending email address as priority so you get push notifications to your phones home screen.
- - Update Program.cs "Items" list with the retailer, the product url and a title for use within the notification email.
- 
-If you are setting this up for the first time, I suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
+ - An email address to send with
+ - An email address to receive notifications
 
 ## How to use
- - Open the project in Visual Studio and compile. This will create bin/Debug/net5.0/UserDetails.yaml
- - Modify UserDetails.yaml with your details as required
+ - Open the project in Visual Studio and compile.
+ - Modify UserDetails.yaml with your details as required (and recompile each time you make a change, or update bin/Debug/net5.0/UserDetails.yaml directly)
  - Add in a test item that is in stock to confirm the notifications work
  - Use as required
+ 
+## Recommendations
+ - Sending via gmail
+   - You might need to allow legacy applications or create an app password using the following [link](https://support.google.com/accounts/answer/185833?hl=en).
+ - Receiving via gmail
+   - You can set the sending email address as priority so you get push notifications to your phones home screen.
+ - If you are setting this up for the first time, I suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
 
 ### Remember: no warranty, responsibility on my behalf or support is provided - use at your own risk!
