@@ -79,13 +79,17 @@ namespace AusStockChecker
                     case "PCCaseGear":
                         Items.Add(new PCCaseGear() { Title = item.Title, Url = item.URL });
                         break;
+                    case "CPL":
+                        Items.Add(new CPLOnline() { Title = item.Title, Url = item.URL });
+                        break;
+                    case "MSY":
+                        Items.Add(new MSY() { Title = item.Title, Url = item.URL });
+                        break;
                     default:
                         Items.Add(new SchemaItem() { Title = item.Title, TaskCategory = item.TaskCategory, Url = item.URL });
                         break;
                 }
-            }
-
-            
+            }            
 
             using var tmr = new Timer(1000);
             tmr.Elapsed += UptimeTimer_Elapsed;
@@ -180,6 +184,9 @@ namespace AusStockChecker
                                 SendNotice(task.Title, $"Stock status change detected `{status}`. If this is an in stock status get on this asap to aquire your item.<br/> - " + task.FormattedUrl);
                             }
                         }
+
+                        if (String.IsNullOrWhiteSpace(status))
+                            status = "*Failed to determine";
 
                         Console.LocalTime(ConsoleColor.DarkGray)
                             .DarkCyan($" {task.TaskCategory}")

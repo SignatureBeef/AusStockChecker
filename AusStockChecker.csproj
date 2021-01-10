@@ -11,4 +11,10 @@
     <PackageReference Include="YamlDotNet" Version="9.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="UserDetails.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

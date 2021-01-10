@@ -43,3 +43,21 @@ Items:
 - Title: 3090 ROG STRIX OC
   URL: https://www.pccasegear.com/products/51847/asus-rog-strix-geforce-rtx-3090-oc-24gb?vade3w={invalidator}
   TaskCategory: PCCaseGear
+- Title: 3080 ROG STRIX OC
+  URL: https://cplonline.com.au/asus-rog-strix-rtx3080-10g-gaming-graphics-card.html?vade3w={invalidator}
+  TaskCategory: CPL
+- Title: 3090 ROG STRIX OC
+  URL: https://cplonline.com.au/asus-rog-strix-rtx3090-o24g-gaming.html?vade3w={invalidator}
+  TaskCategory: CPL
+- Title: Test
+  URL: https://cplonline.com.au/graphics-cards/geforce-rtx-3090/gigabyte-gv-n3090vision-oc-24gd-geforce-rtx-3090-vision-oc-24gb-graphics-card.html?vade3w={invalidator}
+  TaskCategory: CPL
+- Title: 3080 ROG STRIX
+  URL: https://www.msy.com.au/asus-nvidia-geforce-rog-strix-rtx3080-o10g-gaming-10gb-rtx-3080-rog-strix-vga-card?vade3w={invalidator}
+  TaskCategory: MSY
+- Title: 3090 ROG TUF
+  URL: https://www.msy.com.au/asus-nvidia-geforce-tuf-rtx3090-o24g-gaming-24gb-rtx-3090-tuf-gaming-oc-pci-e-vga-card?vade3w={invalidator}
+  TaskCategory: MSY
+- Title: Test
+  URL: https://www.msy.com.au/gigabyte-nvidia-geforce-n3090aorus-m-24gd-24gb-rtx-3090-aorus-master-pci-e-vga-card?vade3w={invalidator}
+  TaskCategory: MSY
