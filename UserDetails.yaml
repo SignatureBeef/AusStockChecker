@@ -4,60 +4,49 @@ ToAddress: --- INSERT EMAIL ADDRESS TO NOTIFY ---
 Host: smtp.gmail.com
 Port: 587
 Items:
+- Title: Xbox
+  URL: https://www.bigw.com.au/product/xbox-series-x-1tb-console/p/124385/
+- Title: PS5
+  URL: https://www.bigw.com.au/product/playstation-5-console/p/124625/
+- Title: 3060
+  URL: https://www.mwave.com.au/product/gigabyte-geforce-rtx-3060-gaming-oc-12gb-video-card-ac42243
+- Title: 3060
+  URL: https://www.pccasegear.com/products/53373/galax-geforce-rtx-3060-ex-1-click-oc-12gb
 - Title: Gaming Keyboard # NOTE: This first item is a test to ensure the emails are sent correctly
   URL: https://www.mwave.com.au/product/respawn-ninja-rn61-compact-rgb-mechanical-gaming-keyboard-kailh-brown-ac36811
-  TaskCategory: Mwave
 - Title: 3080 ROG STRIX OC
   URL: https://www.mwave.com.au/product/asus-geforce-rtx-3080-rog-strix-oc-10gb-video-card-ac38206?vade32={invalidator}
-  TaskCategory: Mwave
 - Title: 3090 ROG STRIX OC
   URL: https://www.mwave.com.au/product/asus-geforce-rtx-3090-rog-strix-gaming-oc-24gb-video-card-ac38207?vade3w={invalidator}
-  TaskCategory: Mwave
 - Title: 3080 ROG STRIX OC
   URL: https://www.umart.com.au/Asus-ROG-Strix-GeForce-RTX-3080-OC-10G-Graphics-Card_56893G.html?vade32={invalidator}
-  TaskCategory: Umart
 - Title: 3090 ROG STRIX OC
   URL: https://www.umart.com.au/Asus-ROG-Strix-GeForce-RTX-3090-OC-24G-Graphics-Card_56890G.html?vade3w={invalidator}
-  TaskCategory: Umart
 - Title: 3080 ROG STRIX OC
   URL: https://www.scorptec.com.au/product/graphics-cards/nvidia/85382-rog-strix-rtx3080-o10g-gaming?vade3w={invalidator}
-  TaskCategory: Scorptec
 - Title: 3090 ROG STRIX OC
   URL: https://www.scorptec.com.au/product/Graphics-Cards/NVIDIA/85441-ROG-STRIX-RTX3090-O24G-GAMING?vade3w={invalidator}
-  TaskCategory: Scorptec
 - Title: 3080 ROG STRIX OC
   URL: https://www.ple.com.au/Products/643403/ASUS-GeForce-RTX-3080-ROG-Strix-Gaming-OC-10GB-GDDR6X?vade3w={invalidator}
-  TaskCategory: Ple
 - Title: 3090 ROG STRIX OC
   URL: https://www.ple.com.au/Products/643402/ASUS-GeForce-RTX-3090-ROG-Strix-Gaming-OC-24GB-GDDR6X?vade3w={invalidator}
-  TaskCategory: Ple
 - Title: 3080 ROG STRIX OC
   URL: https://www.computeralliance.com.au/asus-rtx3080-10gb-rog-strix-oc-gaming-pcie-video-card-rog-strix-rtx3080-o10g-gaming?vade3w={invalidator}
-  TaskCategory: ComputerAlliance
 - Title: 3090 ROG STRIX OC
   URL: https://www.computeralliance.com.au/asus-rtx3090-24gb-rog-strix-oc-pcie-video-card-rog-strix-rtx3090-o24g-gaming?vade3w={invalidator}
-  TaskCategory: ComputerAlliance
 - Title: 3080 ROG STRIX OC
   URL: https://www.pccasegear.com/products/51850/asus-rog-strix-geforce-rtx-3080-oc-10gb?vade3w={invalidator}
-  TaskCategory: PCCaseGear
 - Title: 3090 ROG STRIX OC
   URL: https://www.pccasegear.com/products/51847/asus-rog-strix-geforce-rtx-3090-oc-24gb?vade3w={invalidator}
-  TaskCategory: PCCaseGear
 - Title: 3080 ROG STRIX OC
   URL: https://cplonline.com.au/asus-rog-strix-rtx3080-10g-gaming-graphics-card.html?vade3w={invalidator}
-  TaskCategory: CPL
 - Title: 3090 ROG STRIX OC
   URL: https://cplonline.com.au/asus-rog-strix-rtx3090-o24g-gaming.html?vade3w={invalidator}
-  TaskCategory: CPL
 - Title: Test
   URL: https://cplonline.com.au/graphics-cards/geforce-rtx-3090/gigabyte-gv-n3090vision-oc-24gd-geforce-rtx-3090-vision-oc-24gb-graphics-card.html?vade3w={invalidator}
-  TaskCategory: CPL
 - Title: 3080 ROG STRIX
   URL: https://www.msy.com.au/asus-nvidia-geforce-rog-strix-rtx3080-o10g-gaming-10gb-rtx-3080-rog-strix-vga-card?vade3w={invalidator}
-  TaskCategory: MSY
 - Title: 3090 ROG TUF
   URL: https://www.msy.com.au/asus-nvidia-geforce-tuf-rtx3090-o24g-gaming-24gb-rtx-3090-tuf-gaming-oc-pci-e-vga-card?vade3w={invalidator}
-  TaskCategory: MSY
 - Title: Test
   URL: https://www.msy.com.au/gigabyte-nvidia-geforce-n3090aorus-m-24gd-24gb-rtx-3090-aorus-master-pci-e-vga-card?vade3w={invalidator}
-  TaskCategory: MSY

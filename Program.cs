@@ -11,10 +11,12 @@ using SysConsole = System.Console;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace AusStockChecker
 {
-    class UserDetails {
+    class UserDetails
+    {
         public string FromAddress { get; set; }
         public string FromAddressPassword { get; set; }
         public string ToAddress { get; set; }
@@ -50,7 +52,7 @@ namespace AusStockChecker
             {
                 using (var sr = new StreamReader("UserDetails.yaml"))
                 {
-                    
+
                     var deserializer = new DeserializerBuilder().Build();
                     userDetails = deserializer.Deserialize<UserDetails>(sr.ReadToEnd());
                 }
@@ -62,9 +64,30 @@ namespace AusStockChecker
             }
 
             // Get items desired
-            foreach(Item item in userDetails.Items)
+            foreach (Item item in userDetails.Items)
             {
-                
+                if (String.IsNullOrWhiteSpace(item.TaskCategory))
+                {
+                    if (item.URL.IndexOf("mwave.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "Mwave";
+                    else if (item.URL.IndexOf("pccasegear.com", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "PCCaseGear";
+                    else if (item.URL.IndexOf("umart.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "Umart";
+                    else if (item.URL.IndexOf("scorptec.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "Scorptec";
+                    else if (item.URL.IndexOf("ple.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "Ple";
+                    else if (item.URL.IndexOf("computeralliance.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "ComputerAlliance";
+                    else if (item.URL.IndexOf("msy.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "MSY";
+                    else if (item.URL.IndexOf("cplonline.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "CPL";
+                    else if (item.URL.IndexOf("bigw.com.au", StringComparison.CurrentCultureIgnoreCase) > -1)
+                        item.TaskCategory = "BigW";
+                }
+
                 switch (item.TaskCategory)
                 {
                     case "Mwave":
@@ -85,11 +108,14 @@ namespace AusStockChecker
                     case "MSY":
                         Items.Add(new MSY() { Title = item.Title, Url = item.URL });
                         break;
+                    case "BigW":
+                        Items.Add(new BigW() { Title = item.Title, Url = item.URL });
+                        break;
                     default:
                         Items.Add(new SchemaItem() { Title = item.Title, TaskCategory = item.TaskCategory, Url = item.URL });
                         break;
                 }
-            }            
+            }
 
             using var tmr = new Timer(1000);
             tmr.Elapsed += UptimeTimer_Elapsed;
@@ -102,6 +128,19 @@ namespace AusStockChecker
             Run().Wait();
 
             tmr.Stop();
+        }
+
+        static void Beep()
+        {
+            // custom beeps only work on windows.
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                SysConsole.Beep(5000, 5000);
+            }
+            else
+            {
+                SysConsole.Beep();
+            }
         }
 
         private static void UptimeTimer_Elapsed(object sender, ElapsedEventArgs e) => UptimeTimer_Elapsed();
@@ -122,7 +161,7 @@ namespace AusStockChecker
                 {
                     Host = userDetails.Host,
                     Port = userDetails.Port,
-                    EnableSsl = true, 
+                    EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
                     Credentials = new NetworkCredential(fromAddress.Address, userDetails.FromAddressPassword)
@@ -180,7 +219,7 @@ namespace AusStockChecker
                             if (task.LastStatus != status)
                             {
                                 task.LastStatus = status;
-                                SysConsole.Beep(5000, 5000); // scare the user into knowing the item they wanted can be purchased. a few minutes late via an email can be a problem in the case of amd/nvidia cpu/gpus etc.
+                                Beep(); // scare the user into knowing the item they wanted can be purchased. a few minutes late via an email can be a problem in the case of amd/nvidia cpu/gpus etc.
                                 SendNotice(task.Title, $"Stock status change detected `{status}`. If this is an in stock status get on this asap to aquire your item.<br/> - " + task.FormattedUrl);
                             }
                         }

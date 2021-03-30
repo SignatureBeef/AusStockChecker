@@ -58,6 +58,13 @@ namespace WebScanner
                 using HttpContent content = response.Content;
                 string result = await content.ReadAsStringAsync();
 
+                // Console.WriteLine("result " + (result ?? ""));
+
+                if (result.IndexOf("/_Incapsula_Resource?") > -1)
+                {
+                    throw new Exception("Failed to get page");
+                }
+
                 return result;
             }
             catch (Exception ex)
@@ -98,7 +105,7 @@ namespace WebScanner
                 await page.GoToAsync(url, WaitUntilNavigation.Load);
 
                 string title = await page.GetTitleAsync();
-                while (title == "Security Challenge")
+                while (title == "Security Challenge" || title == "")
                 {
                     await Task.Delay(1000);
                     Console.LocalTime(ConsoleColor.DarkGray).DarkCyan($" Chrome").DarkGray($"> ").WriteLine($"Waiting on cloudflare challenge", ConsoleColor.White);
