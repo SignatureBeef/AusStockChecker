@@ -3,8 +3,9 @@ A tool to monitor stock availability and notify you of items you wish to purchas
 
 Given a list of product urls from these retailers the tool will scan the urls every 30 seconds and it will determine if the item is in stock. If the status has changed to something other than out of stock (in stock, pre order etc) the application will sound a beep and send you an email to purchase your item.
 
-This project was for personal use intended for me to snag one of the new NVIDIA GPU's asap, however it can also be used for nearly all of the items on those retailer websites. 
-Given that this could be abused and that it is not intended for anything else i've decided i'm not providing a compiled binary, and any use of this is at your own risk and i accept no responsibility at all whatsoever. If the tool works for you, great, if not then feel free to PR a fix or deal with it as i have no use for this code at this stage - i'm just putting it up for other people like myself.
+This project was for personal use intended for me to snag one of the new NVIDIA GPU's asap (before miners and other bots!), however it can also be used for nearly all of the items on the supported retailer websites, such as a Xbox Series X, Sony PS5 or even just a keyboard. 
+
+Given that this could be abused and that it is not intended for anything else i've decided i'm not providing a compiled binary, and any use of this is at your own risk and i accept no responsibility at all whatsoever. If the tool works for you, great, if not then feel free to PR with a fix or create a issue to log the problem - i may or may not have the time to fix it for you though.
 
 ![Demo image](https://github.com/DeathCradle/AusStockChecker/blob/main/demo.png?raw=true)
 
@@ -39,3 +40,11 @@ Given that this could be abused and that it is not intended for anything else i'
  - If you are setting this up for the first time, I suggest you use a random in-stock item from the supported retailer of your choice to check to make sure your notifications are working and the PC Beep sound can be heard.
 
 ### Remember: no warranty, responsibility on my behalf or support is provided - use at your own risk!
+
+----
+
+### If you like this project feel free to star, fork, share on [reddit](https://reddit.com) etc so i know it's in use.
+
+Bitcoin donations are welcomed via address [3PRfyMh1brjCqzkw9az2aT7yNjbfkwFZqo](bitcoin:3PRfyMh1brjCqzkw9az2aT7yNjbfkwFZqo)
+
+![QR](btc_donations.png)
